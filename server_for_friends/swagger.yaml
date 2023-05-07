@@ -1,0 +1,335 @@
+swagger: '2.0'
+info:
+  title: Social API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+host: 127.0.0.1:8000
+schemes:
+  - http
+basePath: /
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  Basic:
+    type: basic
+security:
+  - Basic: []
+paths:
+  /relation/:
+    get:
+      operationId: relation_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Relation'
+      tags:
+        - relation
+    parameters: []
+  /relation/accept_request/:
+    patch:
+      operationId: relation_accept_request
+      description: Accept friend request from another user
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            description: User ID to interact
+            required:
+              - to_id
+            type: object
+            properties:
+              to_id:
+                type: string
+                format: uuid
+        - name: id
+          in: header
+          description: User ID
+          type: string
+      responses:
+        '200':
+          description: Request to be friends is accepted
+        '404':
+          description: User not found
+      tags:
+        - relation
+    parameters: []
+  /relation/check_relation/:
+    post:
+      operationId: relation_check_relation
+      description: Check if users are friends or requested or not friends
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            description: User ID to interact
+            required:
+              - to_id
+            type: object
+            properties:
+              to_id:
+                type: string
+                format: uuid
+        - name: id
+          in: header
+          description: User ID
+          type: string
+      responses:
+        '200':
+          description: Relations successfully found
+        '404':
+          description: User not found
+      tags:
+        - relation
+    parameters: []
+  /relation/delete_friend/:
+    patch:
+      operationId: relation_delete_friend
+      description: Delete user from friends
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            description: User ID to interact
+            required:
+              - to_id
+            type: object
+            properties:
+              to_id:
+                type: string
+                format: uuid
+        - name: id
+          in: header
+          description: User ID
+          type: string
+      responses:
+        '204':
+          description: User successfully deleted from friends
+        '404':
+          description: User not found
+      tags:
+        - relation
+    parameters: []
+  /relation/deny_request/:
+    patch:
+      operationId: relation_deny_request
+      description: Deny friend request from another user
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            description: User ID whose requested
+            required:
+              - from_id
+            type: object
+            properties:
+              from_id:
+                type: string
+                format: uuid
+        - name: id
+          in: header
+          description: User ID
+          type: string
+      responses:
+        '204':
+          description: Request to be friends is denied
+        '404':
+          description: User not found
+      tags:
+        - relation
+    parameters: []
+  /relation/send_request/:
+    post:
+      operationId: relation_send_request
+      description: Send friend request to user
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            description: User ID to interact
+            required:
+              - to_id
+            type: object
+            properties:
+              to_id:
+                type: string
+                format: uuid
+        - name: id
+          in: header
+          description: User ID
+          type: string
+      responses:
+        '201':
+          description: Request send
+        '202':
+          description: You are friends now
+        '404':
+          description: User not found
+        '409':
+          description: Request is already sended
+      tags:
+        - relation
+    parameters: []
+  /users/:
+    get:
+      operationId: users_list
+      description: List of all users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+      tags:
+        - users
+    post:
+      operationId: users_create
+      description: Create new user
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - users
+    parameters: []
+  /users/friends/:
+    get:
+      operationId: users_friends
+      description: List of friends of user
+      parameters:
+        - name: id
+          in: header
+          description: User ID
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched all friends of user
+        '404':
+          description: User not found
+      tags:
+        - users
+    parameters: []
+  /users/incoming/:
+    get:
+      operationId: users_incoming
+      description: List of friends of user
+      parameters:
+        - name: id
+          in: header
+          description: User ID
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched all incoming requestes of user
+        '404':
+          description: User not found
+      tags:
+        - users
+    parameters: []
+  /users/outgoing/:
+    get:
+      operationId: users_outgoing
+      description: List of friends of user
+      parameters:
+        - name: id
+          in: header
+          description: User ID
+          type: string
+      responses:
+        '200':
+          description: Successfully fetched all outgoing requestes of user
+        '404':
+          description: User not found
+      tags:
+        - users
+    parameters: []
+  /users/{id}/:
+    get:
+      operationId: users_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - users
+    delete:
+      operationId: users_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+        - users
+    parameters:
+      - name: id
+        in: path
+        description: A UUID string identifying this User.
+        required: true
+        type: string
+        format: uuid
+definitions:
+  Relation:
+    required:
+      - from_user
+      - to_user
+    type: object
+    properties:
+      from_user:
+        title: From user
+        type: string
+        format: uuid
+      to_user:
+        title: To user
+        type: string
+        format: uuid
+      relation:
+        title: Relation
+        type: string
+        enum:
+          - F
+          - R
+  User:
+    required:
+      - name
+    type: object
+    properties:
+      id:
+        title: Id
+        type: string
+        format: uuid
+        readOnly: true
+      name:
+        title: Name
+        description: User's name
+        type: string
+        maxLength: 255
+        minLength: 1
