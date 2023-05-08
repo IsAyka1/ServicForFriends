@@ -44,9 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'server.apps.ServerConfig',
+    'django.contrib.postgres',
     'rest_framework',
     'drf_yasg',
-    # 'django_probes',
 ]
 
 MIDDLEWARE = [
@@ -96,8 +96,7 @@ DATABASES = {
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD'),
         'HOST': env('POSTGRES_HOST'),
-        'PORT': 5000,
-        # 'PORT': env('POSTGRES_PORT'),
+        'PORT': env('POSTGRES_PORT'),
     }
 }
 
