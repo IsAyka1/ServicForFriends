@@ -83,19 +83,19 @@ WSGI_APPLICATION = 'server_for_friends.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+    # 'sqlite': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    #     'USER': env('DATABASE_USER'),
+    #     'PASSWORD': env('DATABASE_PASSWORD'),
+    # },
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASSWORD'),
-    },
-    'postgres': {
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': env('DATABASE_NAME'),
-        # 'USER': env('DATABASE_USER'),
-        # 'PASSWORD': env('DATABASE_PASSWORD'),
-        # 'HOST': env('DATABASE_HOST', default='localhost'),
-        # 'PORT': env('DATABASE_PORT'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': 'postgres',
+        # 'PORT': env('POSTGRES_PORT'),
     }
 }
 
