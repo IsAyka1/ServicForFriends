@@ -7,3 +7,4 @@ django~=4.2.1
 django-environ==0.10
 djangorestframework==3.14
 drf-yasg==1.21.5
+django_probes==1.7.0
