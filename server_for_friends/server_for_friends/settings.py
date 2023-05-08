@@ -89,7 +89,7 @@ DATABASES = {
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASSWORD'),
     },
-    'pgsql': {
+    'postgres': {
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # 'NAME': env('DATABASE_NAME'),
         # 'USER': env('DATABASE_USER'),

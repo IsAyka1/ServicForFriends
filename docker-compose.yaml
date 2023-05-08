@@ -9,3 +9,12 @@ services:
            - 8000:8000
        env_file:
          - ./server_for_friends/.env
+   postgres:
+      image: postgres:13.3
+      environment:
+        POSTGRES_DB: "service_for_friends_bd"
+        POSTGRES_USER: "user"
+        POSTGRES_PASSWORD: "pgpwd123"
+#        PGDATA: "/var/lib/postgresql/data/pgdata"
+      ports:
+        - 5432:5432
