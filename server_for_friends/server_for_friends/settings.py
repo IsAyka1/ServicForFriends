@@ -9,11 +9,14 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import environ
 from pathlib import Path
+
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(BASE_DIR / '.env')
 
 SWAGGER_YAML_FILE = BASE_DIR / 'swagger.yaml'
 
@@ -22,12 +25,13 @@ SWAGGER_YAML_FILE = BASE_DIR / 'swagger.yaml'
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2!dzrh(q^(3)wp7u%=^e=&_3h2(o%r!o@-8u+f-u@$9$$l8k-%'
+SECRET_KEY = env('SECRET_KEY', default="unsafe-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [env('DATABASE_HOST', default='127.0.0.1'), 'localhost', '0.0.0.0']
+
 
 
 # Application definition
@@ -82,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-        'USER': 'admin',
-        'PASSWORD': 'password',
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
     },
     'pgsql': {
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',

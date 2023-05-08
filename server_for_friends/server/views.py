@@ -20,13 +20,10 @@ user_to_param = openapi.Schema(type=openapi.TYPE_OBJECT, required=['to_id'],
                                    'to_id': openapi.Schema(type=openapi.TYPE_STRING, format='uuid')
                                })
 user_from_param = openapi.Schema(type=openapi.TYPE_OBJECT, required=['from_id'],
-                               description='User ID whose requested',
-                               properties={
-                                   'from_id': openapi.Schema(type=openapi.TYPE_STRING, format='uuid')
-                               })
-
-RESPONSE_404 = Response(status=status.HTTP_404_NOT_FOUND)
-RESPONSE_204 = Response(status=status.HTTP_204_NO_CONTENT)
+                                 description='User ID whose requested',
+                                 properties={
+                                     'from_id': openapi.Schema(type=openapi.TYPE_STRING, format='uuid')
+                                 })
 
 
 def _get_user(request, id_attr: str) -> models.User:
@@ -85,7 +82,7 @@ class UserViewset(mixins.CreateModelMixin,
                 all_friends.append(relation.from_user)
 
         serializer = UserSerializer(all_friends, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(manual_parameters=[user_param],
                          operation_description='List of friends of user',
@@ -98,7 +95,7 @@ class UserViewset(mixins.CreateModelMixin,
         requests_relations = models.Relation.objects.filter(to_user=user, relation=models.REQUEST)
         request_users = [relation.from_user for relation in requests_relations]
         serializer = UserSerializer(request_users, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(manual_parameters=[user_param],
                          operation_description='List of friends of user',
@@ -111,7 +108,7 @@ class UserViewset(mixins.CreateModelMixin,
         requests_relations = models.Relation.objects.filter(from_user=user, relation=models.REQUEST)
         request_users = [relation.to_user for relation in requests_relations]
         serializer = UserSerializer(request_users, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class RelationViewset(mixins.ListModelMixin,
@@ -122,7 +119,7 @@ class RelationViewset(mixins.ListModelMixin,
     def list(self, request):
         queryset = models.Relation.objects.all()
         serializer = RelationSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(manual_parameters=[user_param], request_body=user_to_param,
                          operation_description='Send friend request to user',
