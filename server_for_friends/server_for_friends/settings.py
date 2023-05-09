@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+# import
 import environ
 from pathlib import Path
-
 env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,10 +28,9 @@ SWAGGER_YAML_FILE = BASE_DIR / 'swagger.yaml'
 SECRET_KEY = env('SECRET_KEY', default="unsafe-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG_MODE', default=True)
 
-ALLOWED_HOSTS = [env('DATABASE_HOST', default='127.0.0.1'), 'localhost', '0.0.0.0']
-
+ALLOWED_HOSTS = [env('DATABASE_HOST', default='localhost'), '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -92,11 +91,14 @@ DATABASES = {
     # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('POSTGRES_DB'),
-        'USER': env('POSTGRES_USER'),
-        'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': env('POSTGRES_HOST'),
-        'PORT': env('POSTGRES_PORT'),
+        'NAME': env('POSTGRES_DB', default='postgres'),
+        'USER': env('POSTGRES_USER', default='postgres'),
+        'PASSWORD': env('POSTGRES_PASSWORD', default='postgres'),
+        'HOST': env('POSTGRES_HOST', default='localhost'),
+        'PORT': env('POSTGRES_PORT', default='5432'),
+        'TEST': {
+            'NAME': 'test_' + env('POSTGRES_DB', default='postgres'),
+        }
     }
 }
 

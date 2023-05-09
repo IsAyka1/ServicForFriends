@@ -28,19 +28,17 @@ schema_view = get_schema_view(
       default_version='v1',
       description="Test description",
       terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@snippets.local"),
+      contact=openapi.Contact(email="aigul-isl@yandex.ru"),
       license=openapi.License(name="BSD License"),
    ),
    public=True,
    permission_classes=[permissions.AllowAny],
 )
 
-# schema = openapi.Swagger(codecs.yaml_sane_load(SWAGGER_YAML_FILE))
-
 router = DefaultRouter()
 
 router.register('users', views.UserViewset, basename='users')
-router.register('relation', views.RelationViewset)
+router.register('relation', views.RelationViewset, basename='relations')
 
 urlpatterns = [
 
@@ -49,5 +47,4 @@ urlpatterns = [
    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
    re_path(r'^swagger(?P<name>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
    path('redoc', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-
 ]

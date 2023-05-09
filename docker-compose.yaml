@@ -6,7 +6,7 @@ services:
          dockerfile: Dockerfile
        depends_on:
          - postgres
-       restart: on-failure
+       restart: always
        command: sh -c "python manage.py runserver 0.0.0.0:8000"
 #       command: sh -c "python manage.py makemigrations &&
 #         python manage.py migrate &&
