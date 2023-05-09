@@ -1,7 +1,4 @@
 #db
-requests
-zipfile
-
 psycopg-binary>=3.1.8
 psycopg2>=2.9.5
 

@@ -20,6 +20,6 @@ with open(filename, 'wb') as f:
     f.write(resp.content)
 
 with zipfile.ZipFile(filename, 'r') as zip:
-    zip.extractall('pgdata/')
+    zip.extractall('./')
 
 print('Successfully downloaded pgdata')

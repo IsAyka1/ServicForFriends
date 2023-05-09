@@ -1,7 +1,7 @@
 # ServiceForFriends
-`django` `rest frameword` `social network` `server`
+`django` `rest frameword` `social network` `server` `postgres`
 
-Django-sevice for friends (as test project for VK intership)
+Django-service for friends (as test project for VK intership)
 
 
 ## Server can do
@@ -21,7 +21,7 @@ Django-sevice for friends (as test project for VK intership)
 
 
 ## DataBase 
-Base on Postgres 13.3
+Based on Postgres 13.3
 
 ### Model 'User'
 Table of user's informations. It can be email/age/birthday and e.t.c
@@ -29,7 +29,7 @@ Table of user's informations. It can be email/age/birthday and e.t.c
 - name: str
 
 ### Model 'Relation'
-Table of relations between users if its requested to be friends or friends already
+Table of relations between users if it's requested to be friends or friends already
 - from_user: User
 - to_user: User
 - relation: Enum
@@ -38,12 +38,13 @@ Table of relations between users if its requested to be friends or friends alrea
 
 # How to use
 
-* If you want start working with full db run:
+* If you want start working with full db, run:
 ```commandline
+pip install requests
 python download_pgdata.py
-sudo docker-compose up
+docker-compose up
 ```
-* Else run
+* Else if you want empty db, run
 ```commandline
 docker-compose up -d
 docker_compose exec web python manage.py createsuperuser --username=admin --email=test@email.com --no-input
@@ -171,11 +172,11 @@ To login check environment file ```.env``` with `DJANGO_SUPERUSER_USERNAME`, `DJ
 You can:
 - add User (add relation with another existing user)
 - add Relation between existing users 
-(Attension: if you create user1->user2 and user2->user1 they won't be friends)
+(Attention: if you create user1->user2 and user2->user1 they won't be friends)
 - see all of Users
 - see all of Relations
 - delete User
-- delete Relatine
+- delete Relation
 - update User's fields:
   - name
 - update Relation's fields:
