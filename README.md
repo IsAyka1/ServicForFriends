@@ -65,7 +65,6 @@ You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
       curl -X 'GET' 
       'http://0.0.0.0:8000/users/' 
       -H 'accept: application/json' 
-      -H 'X-CSRFToken: HhJLeNJw0Vb3QZgvQl7SHLEx6oknnbQgWpktplVBwxwXWjqTHxQtrUeh1KYPvsvV'
       ```
   - response 200
       ```python
@@ -85,11 +84,10 @@ You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
 
   - 
       ```commandline
-      curl -X 'GET' 
+      curl -X 'POST' 
       'http://0.0.0.0:8000/users/' 
       -H 'accept: application/json' 
       -H 'Content-Type: application/json' 
-      -H 'X-CSRFToken: HhJLeNJw0Vb3QZgvQl7SHLEx6oknnbQgWpktplVBwxwXWjqTHxQtrUeh1KYPvsvV'
       -d '{
           "name": "ayka"
       }'
@@ -102,37 +100,35 @@ You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
        }
      ```
     
-*  Get all friends of user by user_id
+* Get all friends of user by user_id
 
-    - 
-        ```commandline
-       curl -X 'GET' 
-      'http://0.0.0.0:8000/users/' 
-      -H 'accept: application/json' 
-      -H 'id: 1'
-      -H 'X-CSRFToken: HhJLeNJw0Vb3QZgvQl7SHLEx6oknnbQgWpktplVBwxwXWjqTHxQtrUeh1KYPvsvV'
-      ```
-    - response 200
-        ```python
+  - 
+      ```commandline
+     curl -X 'GET' 
+    'http://0.0.0.0:8000/users/' 
+    -H 'accept: application/json' 
+    -H 'id: 1'
+    ```
+  - response 200
+     ```python
       [
          {
            "id": "2",
            "name": "Mike"
          },
       ]
-        ```
-
-
+    ```
 * Get list of all relations
-    - 
-        ```commandline
-       curl -X 'GET' 
-      'http://0.0.0.0:8000/relations/' 
-      -H 'accept: application/json' 
-      -H 'X-CSRFToken: HhJLeNJw0Vb3QZgvQl7SHLEx6oknnbQgWpktplVBwxwXWjqTHxQtrUeh1KYPvsvV'
-      ```
-    - response 200
-        ```python
+
+  -  
+     ```commandline
+     curl -X 'GET' 
+    'http://0.0.0.0:8000/users/' 
+    -H 'accept: application/json' 
+    -H 'id: 1'
+    ```
+  - response 200
+    ```python
       [
          {
            "from_user": "1",
@@ -140,29 +136,29 @@ You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
            "realtion": "F"
          },
       ]
-        ```
-* Send request
-    - 
-        ```commandline
-       curl -X 'POST' 
-       'http://0.0.0.0:8000/relation/send_request/' 
-       -H 'accept: application/json' 
-       -H 'id: 1' 
-       -H 'Content-Type: application/json' 
-       -H 'X-CSRFToken: HhJLeNJw0Vb3QZgvQl7SHLEx6oknnbQgWpktplVBwxwXWjqTHxQtrUeh1KYPvsvV' 
-       -d '{
-       "to_id": "3"
-       }'
-      ```
-    - response 200
-        ```python
-         {
-           "from_user": "1",
-           "to_user": "3",
-           "realtion": "R"
-         }
-        ```  
+    ```
 
+* Send request
+
+  -
+       ```commandline
+         curl -X 'POST' 
+         'http://0.0.0.0:8000/relation/send_request/' 
+         -H 'accept: application/json' 
+         -H 'id: 1' 
+         -H 'Content-Type: application/json' 
+         -d '{
+         "to_id": "3"
+         }'
+       ```
+  - response 200
+      ```python
+       {
+         "from_user": "1",
+         "to_user": "3",
+         "realtion": "R"
+       }
+      ```  
 
 
 ## How to admin
