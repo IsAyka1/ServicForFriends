@@ -24,7 +24,7 @@ Django-service for friends (as test project for VK intership)
 Based on Postgres 13.3
 
 ### Model 'User'
-Table of user's informations. It can be email/age/birthday and e.t.c
+Table of user's information. It can be email/gender/birthday and e.t.c
 - id: uuid
 - name: str
 
@@ -66,9 +66,8 @@ You can go to 0.0.0.0:80 (0.0.0.0:80/swagger) and check rest api
   - 
       ```commandline
       curl -X 'GET' 
-      'http://0.0.0.0:8000/users/' 
+      'http://0.0.0.0:80/users/' 
       -H 'accept: application/json' 
-      -H 'X-CSRFToken: HhJLeNJw0Vb3QZgvQl7SHLEx6oknnbQgWpktplVBwxwXWjqTHxQtrUeh1KYPvsvV'
       ```
   - response 200
       ```python
@@ -88,11 +87,10 @@ You can go to 0.0.0.0:80 (0.0.0.0:80/swagger) and check rest api
 
   - 
       ```commandline
-      curl -X 'GET' 
-      'http://0.0.0.0:8000/users/' 
+      curl -X 'POST' 
+      'http://0.0.0.0:80/users/' 
       -H 'accept: application/json' 
       -H 'Content-Type: application/json' 
-      -H 'X-CSRFToken: HhJLeNJw0Vb3QZgvQl7SHLEx6oknnbQgWpktplVBwxwXWjqTHxQtrUeh1KYPvsvV'
       -d '{
           "name": "ayka"
       }'
@@ -105,37 +103,35 @@ You can go to 0.0.0.0:80 (0.0.0.0:80/swagger) and check rest api
        }
      ```
     
-*  Get all friends of user by user_id
+* Get all friends of user by user_id
 
-    - 
-        ```commandline
-       curl -X 'GET' 
-      'http://0.0.0.0:8000/users/' 
+  - 
+      ```commandline
+      curl -X 'GET' 
+      'http://0.0.0.0:80/users/' 
       -H 'accept: application/json' 
       -H 'id: 1'
-      -H 'X-CSRFToken: HhJLeNJw0Vb3QZgvQl7SHLEx6oknnbQgWpktplVBwxwXWjqTHxQtrUeh1KYPvsvV'
-      ```
-    - response 200
-        ```python
+    ```
+  - response 200
+     ```python
       [
          {
            "id": "2",
            "name": "Mike"
          },
       ]
-        ```
-
-
+    ```
 * Get list of all relations
-    - 
-        ```commandline
-       curl -X 'GET' 
-      'http://0.0.0.0:8000/relations/' 
-      -H 'accept: application/json' 
-      -H 'X-CSRFToken: HhJLeNJw0Vb3QZgvQl7SHLEx6oknnbQgWpktplVBwxwXWjqTHxQtrUeh1KYPvsvV'
-      ```
-    - response 200
-        ```python
+
+  -  
+     ```commandline
+     curl -X 'GET' 
+    'http://0.0.0.0:80/relation/' 
+    -H 'accept: application/json' 
+    -H 'id: 1'
+    ```
+  - response 200
+    ```python
       [
          {
            "from_user": "1",
@@ -143,33 +139,33 @@ You can go to 0.0.0.0:80 (0.0.0.0:80/swagger) and check rest api
            "realtion": "F"
          },
       ]
-        ```
-* Send request
-    - 
-        ```commandline
-       curl -X 'POST' 
-       'http://0.0.0.0:8000/relation/send_request/' 
-       -H 'accept: application/json' 
-       -H 'id: 1' 
-       -H 'Content-Type: application/json' 
-       -H 'X-CSRFToken: HhJLeNJw0Vb3QZgvQl7SHLEx6oknnbQgWpktplVBwxwXWjqTHxQtrUeh1KYPvsvV' 
-       -d '{
-       "to_id": "3"
-       }'
-      ```
-    - response 200
-        ```python
-         {
-           "from_user": "1",
-           "to_user": "3",
-           "realtion": "R"
-         }
-        ```  
+    ```
 
+* Send request
+
+  -
+     ```commandline
+     curl -X 'POST' 
+     'http://0.0.0.0:80/relation/send_request/' 
+     -H 'accept: application/json' 
+     -H 'id: 1' 
+     -H 'Content-Type: application/json' 
+     -d '{
+     "to_id": "3"
+     }'
+     ```
+  - response 200
+     ```python
+       {
+         "from_user": "1",
+         "to_user": "3",
+         "realtion": "R"
+       }
+     ```  
 
 
 ## How to admin
-Go to ```0.0.0.0:8000/admin```
+Go to ```0.0.0.0:80/admin```
 
 To login check environment file ```.env``` with `DJANGO_SUPERUSER_USERNAME`, `DJANGO_SUPERUSER_PASSWORD`.
 You can:
