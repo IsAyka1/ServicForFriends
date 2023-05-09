@@ -21,6 +21,6 @@ services:
       env_file:
         - ./server_for_friends/.env
       volumes:
-        - ./pgdata:/var/lib/postgresql/data
+        - ./pgdata:/var/lib/postgresql/pgdata
       ports:
         - 5432:5432
