@@ -42,17 +42,20 @@ Table of relations between users if it's requested to be friends or friends alre
 ```commandline
 pip install requests
 python download_pgdata.py
-docker-compose up
+docker-compose up -d
+docker-compose exec web python manage.py collectstatic --no-input --clear
 ```
 * Else if you want empty db, run
 ```commandline
 docker-compose up -d
+docker-compose exec web python manage.py migrate --noinput
 docker_compose exec web python manage.py createsuperuser --username=admin --email=test@email.com --no-input
+docker-compose exec web python manage.py collectstatic --no-input --clear
 ```
 
 Wait for loading and then
 
-You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
+You can go to 0.0.0.0:80 (0.0.0.0:80/swagger) and check rest api
 
 **Read ```server_for_friend/swagger.yaml```**
 
