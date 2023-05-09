@@ -1,14 +1,14 @@
 swagger: '2.0'
 info:
   title: Social API
-  description: Test description
+  description: Django-service for friends
   termsOfService: https://www.google.com/policies/terms/
   contact:
-    email: contact@snippets.local
+    email: aigul-isl@yandex,ru
   license:
     name: BSD License
   version: v1
-host: 127.0.0.1:8000
+host: 0.0.0.0:8000
 schemes:
   - http
 basePath: /
@@ -25,7 +25,7 @@ paths:
   /relation/:
     get:
       operationId: relation_list
-      description: ''
+      description: List of all relations
       parameters: []
       responses:
         '200':
@@ -211,7 +211,7 @@ paths:
             $ref: '#/definitions/User'
       responses:
         '201':
-          description: ''
+          description: Successfully created
           schema:
             $ref: '#/definitions/User'
       tags:
@@ -286,7 +286,7 @@ paths:
       parameters: []
       responses:
         '204':
-          description: ''
+          description: Successfully deleted
       tags:
         - users
     parameters:

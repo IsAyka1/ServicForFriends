@@ -35,4 +35,3 @@ class Relation(models.Model):
     class Meta:
         verbose_name = 'Relation'
         verbose_name_plural = 'Relations'
-

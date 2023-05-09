@@ -26,6 +26,4 @@ class RelationAdmin(admin.ModelAdmin):
     fields = ['from_user', 'to_user', 'relation']
 
 
-
-
 admin.site.unregister(Group)

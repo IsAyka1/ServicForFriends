@@ -117,6 +117,7 @@ class RelationViewset(mixins.ListModelMixin,
     queryset = models.Relation.objects.all()
 
     def list(self, request):
+        """List of all relations"""
         queryset = models.Relation.objects.all()
         serializer = RelationSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
