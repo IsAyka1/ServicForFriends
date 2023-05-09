@@ -38,11 +38,17 @@ Table of relations between users if its requested to be friends or friends alrea
 
 # How to use
 
-Firstly you should up docker (web + postgres)
-
+* If you want start working with full db run:
 ```commandline
-sudo docker-compose up --build
+python download_pgdata.py
+sudo docker-compose up
 ```
+* Else run
+```commandline
+docker-compose up -d
+docker_compose exec web python manage.py createsuperuser --username=admin --email=test@email.com --no-input
+```
+
 Wait for loading and then
 
 You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
@@ -53,7 +59,7 @@ You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
 
 * Get list of all users
 
-  - go to ```http://0.0.0.0:8000/users/```
+  - 
       ```commandline
       curl -X 'GET' 
       'http://0.0.0.0:8000/users/' 
@@ -76,7 +82,7 @@ You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
 
 * Create new user (registration)
 
-  - go to ```http://0.0.0.0:8000/users/```
+  - 
       ```commandline
       curl -X 'GET' 
       'http://0.0.0.0:8000/users/' 
@@ -97,7 +103,7 @@ You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
     
 *  Get all friends of user by user_id
 
-    - go to ```http://0.0.0.0:8000/users/friends```
+    - 
         ```commandline
        curl -X 'GET' 
       'http://0.0.0.0:8000/users/' 
@@ -117,7 +123,7 @@ You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
 
 
 * Get list of all relations
-    - go to ```http://0.0.0.0:8000/relation```
+    - 
         ```commandline
        curl -X 'GET' 
       'http://0.0.0.0:8000/relations/' 
@@ -135,7 +141,7 @@ You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
       ]
         ```
 * Send request
-    - go to ```http://0.0.0.0:8000/relation/send_request```
+    - 
         ```commandline
        curl -X 'POST' 
        'http://0.0.0.0:8000/relation/send_request/' 

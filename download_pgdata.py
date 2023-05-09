@@ -1,7 +1,8 @@
 import requests
 import zipfile
 
-resp_for_link = requests.get("https://cloud-api.yandex.net/v1/disk/public/resources/download?public_key=" + "https://disk.yandex.ru/d/2ehFN4VNvq1P2A")
+resp_for_link = requests.get("https://cloud-api.yandex.net/v1/disk/public/resources/download?public_key=" +
+                             "https://disk.yandex.ru/d/2ehFN4VNvq1P2A")
 if resp_for_link.status_code != 200:
     raise requests.RequestException()
 
