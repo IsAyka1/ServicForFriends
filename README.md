@@ -123,9 +123,9 @@ You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
   -  
      ```commandline
      curl -X 'GET' 
-    'http://0.0.0.0:8000/users/' 
-    -H 'accept: application/json' 
-    -H 'id: 1'
+     'http://0.0.0.0:8000/relation/' 
+     -H 'accept: application/json' 
+     -H 'id: 1'
     ```
   - response 200
     ```python
@@ -141,24 +141,24 @@ You can go to 0.0.0.0:8000 (0.0.0.0:8000/swagger) and check rest api
 * Send request
 
   -
-       ```commandline
-         curl -X 'POST' 
-         'http://0.0.0.0:8000/relation/send_request/' 
-         -H 'accept: application/json' 
-         -H 'id: 1' 
-         -H 'Content-Type: application/json' 
-         -d '{
-         "to_id": "3"
-         }'
-       ```
+     ```commandline
+      curl -X 'POST' 
+      'http://0.0.0.0:8000/relation/send_request/' 
+      -H 'accept: application/json' 
+      -H 'id: 1' 
+      -H 'Content-Type: application/json' 
+      -d '{
+      "to_id": "3"
+      }'
+     ```
   - response 200
-      ```python
+     ```python
        {
          "from_user": "1",
          "to_user": "3",
          "realtion": "R"
        }
-      ```  
+     ```  
 
 
 ## How to admin
