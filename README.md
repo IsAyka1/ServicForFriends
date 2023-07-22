@@ -1,7 +1,7 @@
 # ServiceForFriends
 `django` `rest frameword` `social network` `server` `postgres`
 
-Django-service for friends (as test project for VK intership)
+Django-service for friends
 
 
 ## Server can do
